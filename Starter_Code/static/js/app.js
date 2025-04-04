@@ -40,8 +40,6 @@ function buildMetadata(sample) {
   
 }
 
-buildMetadata(940)
-
 
 // function to build both charts
 function buildCharts(sample) {
@@ -108,7 +106,6 @@ function buildCharts(sample) {
 
   });
 }
-buildCharts(940)
 
 // Function to run on page load
 function init() {
@@ -131,18 +128,26 @@ function init() {
     }
 
     // Get the first sample from the list
-
+    selection = d3.select("#selDataset").node().value; //pulling the value of what's in the dropdown
+    console.log(selection)
 
     // Build charts and metadata panel with the first sample
-
+    buildMetadata(selection)
+    buildCharts(selection)
   });
 }
 
 // Function for event listener
-function optionChanged(newSample) {
-  // Build charts and metadata panel each time a new sample is selected
+// function optionChanged(newSample) {
+// Build charts and metadata panel each time a new sample is selected
 
-}
+//this builds new charts whenever seldataset is changed
+d3.select('#selDataset')
+.on('change', function() {
+  newSel = d3.select("#selDataset").node().value;
+  buildMetadata(newSel)
+  buildCharts(newSel)
+})
 
 // Initialize the dashboard
 init();
